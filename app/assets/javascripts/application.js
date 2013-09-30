@@ -12,5 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require turbolinks
+//= require jcanvas.min
+//= require jquery.dotimeout.min
 //= require_tree .

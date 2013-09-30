@@ -1,0 +1,38 @@
+<div class="span4">
+<canvas id="canvas" width="450" height="450"></canvas>
+</div>
+<div class="span8">
+	<h3>Redraw Sample</h3>
+	<em> x=<%=@circle.center.x%> y=<%=@circle.center.y%> radius=<%=@circle.radius%></em>
+	<br><br>
+	<%=form_tag "#", class: "form-inline" do |f| %>
+	<div class="control-group">
+		<div class="controls">
+			<%=label_tag :sample, "Sample Size"%>
+			<%=text_field_tag :sample, @points.size, class: "span1"%>
+			<%=label_tag :interval, "Interval"%>
+			<%=text_field_tag :interval, "100", class: "span1"%> ms
+		</div>
+	</div>
+	<%=submit_tag "Redraw", class: "btn btn-inverse"%>
+	<%end%>
+	<div id="paint_progress" class="progress">
+  		<div class="bar" style="width: 0%;"></div>
+	</div>
+</div>
+<script>
+$("canvas").drawEllipse({
+  fillStyle: "#3AA3F0",
+  x: <%=@circle.center.x%>, y: <%=@circle.center.y%>,
+  width: <%=@circle.diameter%>, height: <%=@circle.diameter%>
+});
+
+<%- @points.each do |point| %>
+$("canvas").drawEllipse({
+  fillStyle: "#000",
+  x: <%=point.x%>, y: <%=point.y%>,
+  width: 4, height: 4
+});
+<%end%>
+CanvasPainter.initialize(<%=@circle.center.x%>,<%=@circle.center.y%>,<%=@circle.radius%>);
+</script>
